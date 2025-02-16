@@ -17,7 +17,7 @@ namespace Flights.Server.Controllers
         }
         Random random = new Random();
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        [HttpGet(Name = "GetFlights")]
         public IEnumerable<FlightRm> Search() => new FlightRm[]
         {  
             new (Guid.NewGuid(),
