@@ -48,7 +48,7 @@
         <input type="number" class="form-control" placeholder="1" />
         <div class="input-group-text">Passengers</div>
 
-        <button type="submit" class="btn-primary btn">
+        <button (click)="serachFlights()" type="submit" class="btn-primary btn">
           <i class="fas fa-search"></i>
         </button>
       </div>
@@ -72,18 +72,18 @@
               </div>
 
               <div class="col">
-                <i class="fa-solid fa-plane-departure-location-dot">{{flight.departure.place}}</i>
+                <i class="fa-solid fa-plane-departure-location-dot">{{flight.departure?.place}}</i>
               </div>
 
               <div class="col m-2">
                 <i class="fa-regular"></i>
-                {{flight.departure.time | date }}
+                {{flight.departure?.time | date }}
               </div>
 
 
               <div class="col">
                 <i class="fa-regular fa-clock"></i>
-                {{flight.departure.time | date:'shortTime' }}
+                {{flight.departure?.time | date:'shortTime' }}
               </div>
 
             </div>
@@ -97,7 +97,7 @@
 
               <i class="fas fa-usd">{{ flight.price }}</i>
               <br />
-              <a class="btn btn-secondary btn-lg mt-2">
+              i<a [routerLink]="['/book-flight', flight.id]" class="btn btn-secondary btn-lg mt-2">
                 <i class="fas fa-ticket"></i>
                 Book
               </a>
@@ -109,18 +109,18 @@
               </div>
 
               <div class="col">
-                <i class="fa-solid fa-plane-departure-location-dot">{{flight.arrival.place}}</i>
+                <i class="fa-solid fa-plane-departure-location-dot">{{flight.arrival?.place}}</i>
               </div>
 
               <div class="col m-2">
                 <i class="fa-regular"></i>
-                {{flight.arrival.time | date }}
+                {{flight.arrival?.time | date }}
               </div>
 
 
               <div class="col">
                 <i class="fa-regular fa-clock"></i>
-                {{flight.departure.time | date:'shortTime' }}
+                {{flight.departure?.time | date:'shortTime' }}
               </div>
             </div>
           </div>

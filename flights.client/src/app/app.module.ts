@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchFlightsComponent } from './search-flights/search-flights.component';
+import { BookFlightComponent } from './book-flight/book-flight.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchFlightsComponent
+    SearchFlightsComponent,
+    BookFlightComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
