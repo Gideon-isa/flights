@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FlightRm } from '../api/models';
-import { FlightService } from '../api/services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FlightRm } from './../api/models';
+import { FlightService } from './../api/services';
 
 @Component({
   selector: 'app-book-flight',
@@ -11,7 +11,9 @@ import { FlightService } from '../api/services';
 })
 export class BookFlightComponent implements OnInit{
 
-  constructor(private route: ActivatedRoute, private flightService: FlightService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private flightService: FlightService) { }
 
   flightId: string = 'not loaded';
   flight: FlightRm = {};
@@ -23,11 +25,20 @@ export class BookFlightComponent implements OnInit{
 
   private findFlight = (flightId: string | null) => {
     this.flightId = flightId ?? 'not passed';
-
     this.flightService.findFlight({ id: this.flightId })
       .subscribe({
         next: response => this.flight = response,
-        //error: this.handleError
+        error: this.handleError
       });
+  }
+
+  private handleError = (error: any) => {
+    if (error.status == 404) {
+      alert("Flight not found!");
+      this.router.navigate(['/search-flights']);
+    }
+    console.log("Response Error. Status: ", error.status)
+    console.log("Response Error. Status Tesx: ", error.statusText)
+    console.log(error);
   }
 }
