@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlightRm } from './../api/models';
 import { FlightService } from './../api/services';
 import { AuthService } from './../auth/auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-book-flight',
@@ -12,13 +13,21 @@ import { AuthService } from './../auth/auth.service';
 })
 export class BookFlightComponent implements OnInit{
 
+  form: FormGroup;
+  flightId: string = 'not loaded';
+  flight: FlightRm = {};
+
   constructor(private route: ActivatedRoute,
     private router: Router,
     private flightService: FlightService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private formBuilder: FormBuilder) {
 
-  flightId: string = 'not loaded';
-  flight: FlightRm = {};
+
+    this.form = this.formBuilder.group({
+      number: [1]
+    });
+  }
 
   ngOnInit(): void {
 
@@ -46,5 +55,10 @@ export class BookFlightComponent implements OnInit{
     console.log("Response Error. Status: ", error.status)
     console.log("Response Error. Status Tesx: ", error.statusText)
     console.log(error);
+  }
+
+  book() {
+    console.log(`Booking ${this.form.get('number')?.value} passengers for the flight: ${this.flight.id}`);
+ 
   }
 }

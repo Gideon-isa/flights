@@ -1,3 +1,4 @@
+using Flights.Server.Dtos;
 using Flights.Server.ReadModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,8 +14,8 @@ namespace Flights.Server.Controllers
 
         static private Random random = new Random();
 
-        static private FlightRm[] flightRms = new FlightRm[]
-        {
+        static private FlightRm[] flightRms =
+        [
             new (Guid.NewGuid(),
                 "American Airlines",
                 random.Next(90, 5000).ToString(),
@@ -63,7 +64,8 @@ namespace Flights.Server.Controllers
                     new TimePlaceRm("Le Bourget",DateTime.Now.AddHours(random.Next(1, 58))),
                     new TimePlaceRm("Zagreb",DateTime.Now.AddHours(random.Next(4, 60))),
                         random.Next(1, 853))
-        };
+        ];
+        static private IList<BookDto> Bookings = [];
 
         public FlightController(ILogger<FlightController> logger)
         {
@@ -89,6 +91,14 @@ namespace Flights.Server.Controllers
                 return NotFound();
             }
             return Ok(flight);
+        }
+
+
+        [HttpPost]
+        public void Book(BookDto dto) 
+        {
+            System.Diagnostics.Debug.WriteLine($"Booking a new flight {dto.FlightId}");
+            Bookings.Add(dto);
         }
     }
 }
