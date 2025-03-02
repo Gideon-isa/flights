@@ -84,9 +84,20 @@
         <br>
       </form>
     </div>
+    <div *ngIf="number?.invalid && (number?.dirty || number?.touched)" class="invalid-feedback d-block">
+      <div *ngIf="number?.errors?.['required']">
+        how many peopl do ypu eanr to book the flight for?
+      </div>
+      <div *ngIf="number?.errors?.['min']">
+        You cannot book less than 1 Passenger!
+      </div>
+      <div *ngIf="number?.errors?.['max']">
+        Our planes do not have more than 254 seats?
+      </div>
+    </div>
   </div>
+</div>
 
-  </div>
   
 
 

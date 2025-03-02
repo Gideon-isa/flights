@@ -5,6 +5,11 @@
       <input (blur)="checkPassenger()" formControlName="email" placeholder="Email" class="form-control" type="text" />
       <label for="email">Email</label>
 
+      <div class="invalid-feedback d-block"
+           *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched)">
+        <div *ngIf="form.get('email')?.errors">Email is invalid</div>
+      </div>
+
     </div>
     <div class="d-grid gap-3">
 
@@ -13,12 +18,21 @@
         <input formControlName="firstName" class="form-control" type="text" id="firstName" placeholder="First Name" />
         <label class="form-label" for="firstName">First Name</label>
 
+        <div class="invalid-feedback d-block"
+             *ngIf="form.get('firstName')?.invalid && (form.get('firstName')?.dirty || form.get('email')?.touched)">
+          <div *ngIf="form.get('firstName')?.errors">First is invalid</div>
+        </div>
       </div>
 
       <div class="form-floating">
 
         <input formControlName="lastName" placeholder="Last Name" class="form-control" id="lastName" type="text" />
         <label class="form-label" for="lastName">Last Name</label>
+
+        <div class="invalid-feedback d-block"
+             *ngIf="form.get('lastName')?.invalid && (form.get('lastName')?.dirty || form.get('lastName')?.touched)">
+          <div *ngIf="form.get('lastName')?.errors">Last Name is invalid</div>
+        </div>
 
       </div>
       <div class="d-flex flex-row">
